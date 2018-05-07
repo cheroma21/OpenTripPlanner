@@ -6,11 +6,10 @@ WORKDIR /usr/src/app
 RUN mkdir -p base/graphs/dc
 
 # Add DC data.
-ADD coord/otp-base/graphs/dc/* base/graphs/dc/
+ADD coord/otp-base/graphs/dc base/graphs/dc/
 
 # Add fake locations.
-RUN mkdir -p coord/test-gbfs
-ADD coord/test-gbfs/* coord/test-gbfs/
+ADD coord/bike coord/bike/
 
 # Add router.
 ADD target/otp-1.3.0-SNAPSHOT-shaded.jar otp-1.3.0-SNAPSHOT-shaded.jar

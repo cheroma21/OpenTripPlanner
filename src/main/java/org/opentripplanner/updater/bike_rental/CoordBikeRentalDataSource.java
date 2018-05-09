@@ -18,6 +18,7 @@ public class CoordBikeRentalDataSource implements BikeRentalDataSource, JsonConf
 
     private CoordBikeDataSource stationSource;
     private CoordFakeStationDataSource fakeSource;
+    private boolean isFakeDropoffsUpdated;
 
     public CoordBikeRentalDataSource () throws Exception {
 
@@ -55,7 +56,12 @@ public class CoordBikeRentalDataSource implements BikeRentalDataSource, JsonConf
 
     @Override
     public boolean update() {
-        return stationSource.update() && fakeSource.update();
+        if (isFakeDropoffsUpdated) {
+            return stationSource.update();
+        } else {
+            isFakeDropoffsUpdated = true;
+            return stationSource.update() && fakeSource.update();
+        }
     }
 
     @Override

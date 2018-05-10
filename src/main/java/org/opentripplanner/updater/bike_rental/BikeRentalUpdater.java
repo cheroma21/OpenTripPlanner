@@ -177,7 +177,7 @@ public class BikeRentalUpdater extends PollingGraphUpdater {
                     vertex = new BikeRentalStationVertex(graph, station);
                     if (!splitter.linkToClosestWalkableEdge(vertex, DESTRUCTIVE_SPLIT)) {
                         // the toString includes the text "Bike rental station"
-                        LOG.warn("{} not near any streets; it will not be usable.", station);
+                        LOG.warn("Ignoring {} since it's not near any streets; it will not be usable.", station);
                     }
                     verticesByStation.put(station, vertex);
                     if (station.allowPickup)
@@ -185,7 +185,7 @@ public class BikeRentalUpdater extends PollingGraphUpdater {
                     if (station.allowDropoff)
                         new RentABikeOffEdge(vertex, vertex, station.networks);
                 } else if (station.x != vertex.getX() || station.y != vertex.getY()) {
-                    LOG.warn("{} has changed, re-graphing", station);
+                    LOG.info("{} has changed, re-graphing", station);
 
                     // First remove the old one.
                     if (graph.containsVertex(vertex)) {
@@ -195,7 +195,7 @@ public class BikeRentalUpdater extends PollingGraphUpdater {
                     vertex = new BikeRentalStationVertex(graph, station);
                     if (!splitter.linkToClosestWalkableEdge(vertex, DESTRUCTIVE_SPLIT)) {
                         // the toString includes the text "Bike rental station"
-                        LOG.warn("{} not near any streets; it will not be usable.", station);
+                        LOG.warn("Ignoring {} since it's not near any streets; it will not be usable.", station);
                     }
                     verticesByStation.put(station, vertex);
                     if (station.allowPickup)

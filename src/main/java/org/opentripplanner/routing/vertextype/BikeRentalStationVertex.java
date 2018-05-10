@@ -37,6 +37,10 @@ public class BikeRentalStationVertex extends Vertex {
     private int spacesAvailable;
 
     private boolean pickupAllowed;
+    /**
+     * isFloatingBike denotes whether a bike is dockless or not.
+     */
+    public final boolean isFloatingBike;
 
     private String id;
 
@@ -54,6 +58,7 @@ public class BikeRentalStationVertex extends Vertex {
         this.setBikesAvailable(station.bikesAvailable);
         this.setSpacesAvailable(station.spacesAvailable);
         this.setPickupAllowed(station.allowPickup);
+        this.isFloatingBike = station.isFloatingBike;
     }
 
     public int getBikesAvailable() {

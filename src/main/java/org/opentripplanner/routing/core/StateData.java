@@ -51,6 +51,11 @@ public class StateData implements Cloneable {
 
     protected boolean usingRentedBike;
 
+    /**
+     * isFloatingBike denotes whether a bike is dockless or not.
+     */
+    protected boolean isFloatingBike;
+
     protected boolean carParked;
 
     protected boolean bikeParked;

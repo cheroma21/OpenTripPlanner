@@ -148,7 +148,7 @@ public class BikeParkUpdater extends PollingGraphUpdater {
                     bikeParkVertex = new BikeParkVertex(graph, bikePark);
                     if (!splitter.linkToClosestWalkableEdge(bikeParkVertex, DESTRUCTIVE_SPLIT)) {
                         // the toString includes the text "Bike park"
-                        LOG.warn("{} not near any streets; it will not be usable.", bikePark);
+                        LOG.warn("Ignoring {} since it's not near any streets; it will not be usable.", bikePark);
                     }
                     verticesByPark.put(bikePark, bikeParkVertex);
                     new BikeParkEdge(bikeParkVertex);

@@ -77,7 +77,7 @@ public abstract class RentABikeAbstractEdge extends Edge {
                 : options.bikeRentalPickupCost);
         s1.incrementTimeInSeconds(options.arriveBy ? options.bikeRentalDropoffTime
                 : options.bikeRentalPickupTime);
-        s1.setBikeRenting(true);
+        s1.setBikeRenting(true, vertex.isFloatingBike);
         s1.setBikeRentalNetwork(networks);
         s1.setBackMode(s0.getNonTransitMode());
         State s1b = s1.makeState();
@@ -101,7 +101,7 @@ public abstract class RentABikeAbstractEdge extends Edge {
                 : options.bikeRentalDropoffCost);
         s1e.incrementTimeInSeconds(options.arriveBy ? options.bikeRentalPickupTime
                 : options.bikeRentalDropoffTime);
-        s1e.setBikeRenting(false);
+        s1e.setBikeRenting(false, false);
         s1e.setBackMode(TraverseMode.WALK);
         State s1 = s1e.makeState();
         return s1;

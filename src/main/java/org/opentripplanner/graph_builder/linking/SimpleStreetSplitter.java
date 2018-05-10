@@ -182,11 +182,9 @@ public class SimpleStreetSplitter implements StreetSplitter {
 
         final double DUPLICATE_WAY_EPSILON_DEGREES = SphericalDistanceLibrary.metersToDegrees(DUPLICATE_WAY_EPSILON_METERS);
 
-        final TraverseModeSet traverseModeSet;
+        final TraverseModeSet traverseModeSet = new TraverseModeSet(traverseMode);
         if (traverseMode == TraverseMode.BICYCLE) {
-            traverseModeSet = new TraverseModeSet(traverseMode, TraverseMode.WALK);
-        } else {
-            traverseModeSet = new TraverseModeSet(traverseMode);
+            traverseModeSet.setWalk(true);
         }
         // We sort the list of candidate edges by distance to the stop
         // This should remove any issues with things coming out of the spatial index in different orders
@@ -558,7 +556,6 @@ public class SimpleStreetSplitter implements StreetSplitter {
             name = location.name;
         }
         TemporaryStreetLocation closest = new TemporaryStreetLocation(UUID.randomUUID().toString(),
-            // TODO(mahmood): what if we make a TemporaryBikeDropOff too if it's a destination and options.modes contains BICYCLE?
             coord, new NonLocalizedString(name), endVertex);
 
         TraverseMode nonTransitMode = TraverseMode.WALK;

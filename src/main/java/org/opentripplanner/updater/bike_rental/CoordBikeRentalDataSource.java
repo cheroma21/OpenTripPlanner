@@ -60,7 +60,8 @@ public class CoordBikeRentalDataSource implements BikeRentalDataSource, JsonConf
             return stationSource.update();
         } else {
             isFakeDropoffsUpdated = true;
-            return stationSource.update() && fakeSource.update();
+            // TODO(mahmood): Clean this up after we decided to no longer use fake dropoffs.
+            return stationSource.update() /* && fakeSource.update() */;
         }
     }
 
@@ -109,15 +110,10 @@ public class CoordBikeRentalDataSource implements BikeRentalDataSource, JsonConf
             brstation.spacesAvailable = numDocks != null ? numDocks.asInt() : 0;
             brstation.allowDropoff = isReturning != null ? isReturning.asBoolean() : false;
             brstation.allowPickup = isRenting != null ? isRenting.asBoolean() : false;
-
-            // TODO(danieljy): I don't think this is used in the codebase as is, but we should use the info so that
-            // we don't have to fake end locations.
             brstation.isFloatingBike = properties.get("location_type").asText().equals("free_bike");
-
 
             // Set the system ID as the network.
             brstation.networks = new HashSet<>(Arrays.asList(properties.path("system_id").asText()));
-
             return brstation;
         }
     }

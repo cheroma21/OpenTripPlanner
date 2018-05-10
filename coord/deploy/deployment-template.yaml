@@ -13,7 +13,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 0
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       name: *app_name
@@ -43,7 +43,7 @@ spec:
           httpGet:
             path: "/"
             port: 8080
-          initialDelaySeconds: 300
+          initialDelaySeconds: 600
           periodSeconds: 10
           timeoutSeconds: 2
           failureThreshold: 2
@@ -51,7 +51,7 @@ spec:
           httpGet:
             path: '/otp/routers/default/plan?fromPlace=38.91828427307541%2C-77.0005989074707&toPlace=38.90011780426885%2C-77.003173828125&mode=TRANSIT%2CWALK%2CBICYCLE_RENT&maxWalkDistance=5000'
             port: 8080
-          initialDelaySeconds: 300
+          initialDelaySeconds: 600
           periodSeconds: 20
           timeoutSeconds: 5
           failureThreshold: 1

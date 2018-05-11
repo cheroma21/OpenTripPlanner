@@ -52,8 +52,6 @@ jobs:
     steps:
       # Checkout step is required to enable the keys.
       - checkout
-      - attach_workspace:
-          at: .
 
       # Restore the latest gcloud version (CircleCI knows to look for the most recently written cache entry with a
       # prefix that matches the specified one ("gcloud" in this case).
@@ -103,12 +101,17 @@ jobs:
 
     steps:
       - checkout
+
       - attach_workspace:
           at: .
+
       - restore_cache:
         keys:
-          - gcloud
-          - deployment-tools
+        - gcloud
+
+      - restore_cache:
+        keys:
+        - deployment-tools
 
       # We use the name of the job to get the environment for deployment.
       - run: circle_deploy --build --deploy $CIRCLE_JOB coord/deploy/*.yaml
@@ -126,10 +129,8 @@ workflows:
             tags:
               only: /[0-9]{4}-[0-9]{2}-[0-9]{2}(v[0-9]+)?|v[0-9]+(\.[0-9]+)*/
 
-      # Run the "gcloud" job after build for master and for releases.
+      # Run the "gcloud" job for master and for releases.
       - gcloud:
-          requires:
-            - build
           filters:
             branches:
               only: master

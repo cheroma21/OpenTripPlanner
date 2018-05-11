@@ -106,12 +106,12 @@ jobs:
           at: .
 
       - restore_cache:
-        keys:
-        - gcloud
+          keys:
+          - gcloud
 
       - restore_cache:
-        keys:
-        - deployment-tools
+          keys:
+          - deployment-tools
 
       # We use the name of the job to get the environment for deployment.
       - run: circle_deploy --build --deploy $CIRCLE_JOB coord/deploy/*.yaml

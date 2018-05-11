@@ -113,6 +113,9 @@ jobs:
           keys:
           - deployment-tools
 
+      # Download graph data
+      - run: ./coord/download-data.sh
+
       # We use the name of the job to get the environment for deployment.
       - run: circle_deploy --build --deploy $CIRCLE_JOB coord/deploy/*.yaml
   

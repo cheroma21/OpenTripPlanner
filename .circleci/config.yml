@@ -95,6 +95,12 @@ jobs:
           paths:
             - /opt/circleci/.pyenv
           key: deployment-tools-{{epoch}}
+      
+      - persist_to_workspace:
+          root: .
+          paths:
+            - /opt/google-cloud-sdk
+            - /opt/circleci/.pyenv
     
   _push_job: &push_job
     machine:
@@ -102,6 +108,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - checkout
+      - attach_workspace:
+          at: .
+
       # We use the name of the job to get the environment for deployment.
       - run: circle_deploy --build --deploy $CIRCLE_JOB coord/deploy/*.yaml
   
